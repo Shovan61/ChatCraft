@@ -1,14 +1,24 @@
 import { Button } from "@/components/ui/button";
+import { SignOutButton } from "@clerk/nextjs";
 import Image from "next/image";
+import Link from "next/link";
+import { currentUser } from "@clerk/nextjs/server";
 
-export default function ChatCraftWireframe() {
+export default async function Main() {
+  const currentUserDetails = await currentUser();
+  console.log(currentUserDetails);
+
   return (
     <main className="min-h-screen bg-gray-50 text-gray-800">
       {/* Header */}
       <header className="border-b bg-white">
         <div className="mx-auto max-w-6xl flex items-center justify-between p-4">
           <Image src="/logo.png" width={200} height={200} alt="Icon" />
-          
+          {currentUserDetails?.firstName && (
+            <SignOutButton>
+              <Button>Sign Out</Button>
+            </SignOutButton>
+          )}
         </div>
       </header>
 
@@ -26,11 +36,18 @@ export default function ChatCraftWireframe() {
             from one simple dashboard.
           </p>
           <div className="pt-2">
-            <Button>Login To ChatCraft</Button>
+            {!currentUserDetails?.firstName && (
+              <Button>
+                <Link href={"/dashboard"}>Login To ChatCraft</Link>
+              </Button>
+            )}
+            {currentUserDetails?.firstName && (
+              <Button>
+                <Link href={"/dashboard"}>Go To Dashboard</Link>
+              </Button>
+            )}
           </div>
         </div>
-
-   
       </section>
 
       {/* Features */}
