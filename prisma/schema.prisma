@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum INTEGRATIONS {
+  INSTAGRAM
+}
+
+enum MEDIATYPE {
+  IMAGE
+  VIDEO
+  CAROSEL_ALBUM
+}
+
+enum LISTNERS {
+  SMARTAI
+  MESSAGE
+}
+
+model User {
+  id           String         @id @default(uuid()) @db.Uuid
+  clerkId      String         @unique
+  email        String         @unique
+  firstName    String?        @unique
+  lastName     String?        @unique
+  createdAt    DateTime       @default(now())
+  automations  Automation[]
+  integrations Integrations[]
+}
+
+model Automation {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  createdAt DateTime @default(now())
+  active    Boolean  @default(false)
+
+  userId String @db.Uuid
+  user   User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  trigger  Trigger[]
+  listner  Listener?
+  posts    Post[]
+  dms      DMS[]
+  keywords Keyword[]
+}
+
+model Integrations {
+  id          String       @id @default(uuid())
+  name        INTEGRATIONS @default(INSTAGRAM)
+  createdAt   DateTime     @default(now())
+  userId      String       @db.Uuid
+  User        User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token       String
+  expiresAt   DateTime?
+  instagramId String       @unique
+}
+
+model Listener {
+  id           String     @id @default(uuid())
+  automationId String     @unique @db.Uuid
+  Automation   Automation @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  listener     LISTNERS   @default(MESSAGE)
+  prompt       String
+  commentReply String?
+  dmCount      Int        @default(0)
+  commentCount Int        @default(0)
+}
+
+model Trigger {
+  id           String      @id @default(uuid())
+  type         String
+  automationId String      @db.Uuid
+  Automation   Automation? @relation(fields: [automationId], references: [id], onDelete: Cascade)
+}
+
+model Keyword {
+  id           String      @id @default(uuid())
+  word         String
+  automationId String      @db.Uuid
+  Automation   Automation? @relation(fields: [automationId], references: [id], onDelete: Cascade)
+
+  @@unique([automationId, word])
+}
+
+model DMS {
+  id           String      @id @default(uuid())
+  automationId String      @db.Uuid
+  Automation   Automation? @relation(fields: [automationId], references: [id])
+  createdAt    DateTime    @default(now())
+  senderId     String?
+  receiver     String?
+  message      String?
+}
+
+model Post {
+  id String @id @default(uuid())
+
+  automation   Automation? @relation(fields: [automationId], references: [id], onDelete: Cascade)
+  automationId String?     @db.Uuid
+  postId       String
+  caption      String?
+  media        String
+  mediaType    MEDIATYPE   @default(IMAGE)
+}
