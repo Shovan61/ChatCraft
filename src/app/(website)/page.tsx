@@ -44,7 +44,7 @@ export default async function Main() {
             )}
             {currentUserDetails?.firstName && (
               <Button>
-                <Link href={"/dashboard"}>Go To Dashboard</Link>
+                <Link href={"/dashboard/home"}>Go To Dashboard</Link>
               </Button>
             )}
           </div>

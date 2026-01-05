@@ -4,6 +4,8 @@ import { Separator } from "@/components/ui/separator";
 import { usePaths } from "@/hooks/use-paths";
 import Image from "next/image";
 import Items from "./items";
+import ClerkAuthState from "../clerk-auth-state/ClerkAuthState";
+import { HelpDuoToneWhite } from "@/icons";
 
 type Props = {
   slug: string;
@@ -51,13 +53,13 @@ function Sidebar({ slug }: Props) {
           <Separator orientation="horizontal" className="bg-gray-300 w-full" />
         </div>
         <div className="px-3 flex flex-col gap-y-5">
-          <div className="flex gap-x-2">
-            {/* <ClerkAuthState /> */}
-            <p className="text-[#9B9CA0]">Profile</p>
+          <div className="flex gap-x-2 items-center">
+            <ClerkAuthState />
+            <p className="text-gray-500">Profile</p>
           </div>
           <div className="flex gap-x-3">
-            {/* <HelpDuoToneWhite /> */}
-            <p className="text-[#9B9CA0]">Help</p>
+            <HelpDuoToneWhite />
+            <p className="text-gray-500">Help</p>
           </div>
         </div>
       </div>
