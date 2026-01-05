@@ -3,6 +3,7 @@ import { SignOutButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
+import { DASHBOARD_CARDS } from "@/constants/dashboard";
 
 export default async function Main() {
   const currentUserDetails = await currentUser();
@@ -55,26 +56,16 @@ export default async function Main() {
         <div className="mx-auto max-w-6xl px-6 py-16">
           <h2 className="text-2xl font-semibold mb-10">What ChatCraft does</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="border-2 border-dashed rounded p-6 space-y-3">
-              <h3 className="font-medium">Auto-replies</h3>
-              <p className="text-gray-600 text-sm">
-                Instantly respond to common questions and keywords in your
-                Instagram DMs.
-              </p>
-            </div>
-            <div className="border-2 border-dashed rounded p-6 space-y-3">
-              <h3 className="font-medium">Smart workflows</h3>
-              <p className="text-gray-600 text-sm">
-                Route conversations, tag users, and trigger actions based on
-                messages.
-              </p>
-            </div>
-            <div className="border-2 border-dashed rounded p-6 space-y-3">
-              <h3 className="font-medium">One inbox</h3>
-              <p className="text-gray-600 text-sm">
-                View and manage all Instagram conversations from a single place.
-              </p>
-            </div>
+            {DASHBOARD_CARDS.map((content) => (
+              <div
+                className="border-2 border-dashed rounded p-6 space-y-3"
+                key={content.id}
+              >
+                <h3 className="font-medium">{content.label}</h3>
+                <p className="text-gray-600">{content.subLabel}</p>
+                <p className="text-gray-600 text-sm">{content.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
