@@ -13,14 +13,13 @@ import Search from "./search";
 import CreateAutomation from "../create-automation";
 import GoToAutomationsButton from "../goto-automation-button";
 import Sheet from "../sheet";
+import MainBreadCrumb from "../main-bread-crumb";
 
 type Props = { slug: string };
 
 function InfoBar({ slug }: Props) {
   const { page } = usePaths();
   const currentPage = PAGE_BREAD_CRUMBS.includes(page) || page == slug;
-  console.log(currentPage, "currentPage");
-  console.log(page, "page");
 
   return (
     currentPage && (
@@ -44,11 +43,11 @@ function InfoBar({ slug }: Props) {
                 <div className="px-3 flex flex-col gap-y-5">
                   <div className="flex gap-x-2">
                     <ClerkAuthState />
-                    <p className="text-[#9B9CA0]">Profile</p>
+                    <span className="text-[#9B9CA0]">Profile</span>
                   </div>
                   <div className="flex gap-x-3">
                     <HelpDuoToneWhite />
-                    <p className="text-[#9B9CA0]">Help</p>
+                    <span className="text-[#9B9CA0]">Help</span>
                   </div>
                 </div>
               </div>
@@ -59,6 +58,7 @@ function InfoBar({ slug }: Props) {
           {/* <GoToAutomationsButton /> */}
           <Notifications />
         </div>
+        <MainBreadCrumb page={page === slug ? "Home" : page} slug={slug} />
       </div>
     )
   );

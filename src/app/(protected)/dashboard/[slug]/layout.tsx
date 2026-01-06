@@ -8,13 +8,15 @@ type Props = {
   params: { slug: string };
 };
 
-function Layout({ children, params }: Props) {
+async function Layout({ children, params }: Props) {
+  const { slug } = await params;
   // QueryClient
+  console.log(slug, " slug params=========================");
 
   //   WIP: query client and fetch data
   return (
     <div className="p-4">
-      <Sidebar slug={params.slug} />
+      <Sidebar slug={slug} />
       <div
         className="
       lg:ml-62.5 

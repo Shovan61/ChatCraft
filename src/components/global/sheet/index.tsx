@@ -1,6 +1,8 @@
 import {
   Sheet as ShadcnSheet,
   SheetContent,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 
@@ -18,6 +20,9 @@ const Sheet = ({ children, trigger, className, side }: Props) => {
     <ShadcnSheet>
       <SheetTrigger className={className}>{trigger}</SheetTrigger>
       <SheetContent side={side} className="p-0">
+        <SheetHeader>
+          <SheetTitle></SheetTitle>
+        </SheetHeader>
         {children}
       </SheetContent>
     </ShadcnSheet>

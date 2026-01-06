@@ -55,11 +55,11 @@ function Sidebar({ slug }: Props) {
         <div className="px-3 flex flex-col gap-y-5">
           <div className="flex gap-x-2 items-center">
             <ClerkAuthState />
-            <p className="text-gray-500">Profile</p>
+            <span className="text-gray-500">Profile</span>
           </div>
           <div className="flex gap-x-3">
             <HelpDuoToneWhite />
-            <p className="text-gray-500">Help</p>
+            <span className="text-gray-500">Help</span>
           </div>
         </div>
       </div>
