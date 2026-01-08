@@ -3,24 +3,39 @@
 import { client } from "@/lib/prisma";
 
 export const findUser = async (clerkId: string) => {
-  try {
-    return await client.user.findUnique({
-      where: {
-        clerkId,
-      },
-      include: {
-        integrations: {
-          select: {
-            id: true,
-            token: true,
-            expiresAt: true,
-            name: true,
-          },
+  return await client.user.findUnique({
+    where: {
+      clerkId,
+    },
+    include: {
+      integrations: {
+        select: {
+          id: true,
+          token: true,
+          expiresAt: true,
+          name: true,
         },
       },
-    });
-  } catch (error) {
-    console.log(error);
-    throw new Error("Error in findUser function");
-  }
+    },
+  });
+};
+
+export const createUser = async (
+  clerkId: string,
+  firstName: string,
+  lastName: string,
+  email: string
+) => {
+  return await client.user.create({
+    data: {
+      clerkId,
+      firstName,
+      lastName,
+      email,
+    },
+    select: {
+      firstName: true,
+      lastName: true,
+    },
+  });
 };
