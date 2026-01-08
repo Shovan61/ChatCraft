@@ -1,9 +1,8 @@
+import { onBoardUser } from "@/actions/users";
 import React from "react";
 
-function Dashboardpage() {
-  // WIP: Server action Onboard the user
-  // WIP 200 | 201
-  
+async function Dashboardpage() {
+ const user = await onBoardUser()
   return <div>Dashboardpage</div>;
 }
 
