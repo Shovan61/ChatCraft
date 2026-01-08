@@ -16,7 +16,7 @@ const Items = ({ page, slug }: Props) => {
         "capitalize flex gap-x-2 rounded-full p-3",
         page === item.label && "bg-gray-100",
         page === slug && item.label === "home"
-          ? "bg-[#0f0f0f]"
+          ? "bg-gray-100"
           : "text-[#9B9CA0]"
       )}
     >

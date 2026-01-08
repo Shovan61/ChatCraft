@@ -44,11 +44,21 @@ export const onBoardUser = async () => {
         }
       }
 
+      if (!found?.firstName || !found.lastName) {
+        return {
+          status: 404,
+          data: undefined,
+        };
+      }
+
+      
+      
+
       return {
         status: 200,
         data: {
-          firstname: found.firstName,
-          lastname: found.lastName,
+          firstName: found.firstName,
+          lastName: found.lastName,
         },
       };
     }

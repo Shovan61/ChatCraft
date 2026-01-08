@@ -11,7 +11,6 @@ type Props = {
 async function Layout({ children, params }: Props) {
   const { slug } = await params;
   // QueryClient
-  console.log(slug, " slug params=========================");
 
   //   WIP: query client and fetch data
   return (
@@ -27,7 +26,7 @@ async function Layout({ children, params }: Props) {
       overflow-auto
       "
       >
-        <InfoBar slug={params.slug} />
+        <InfoBar slug={slug} />
         {children}
       </div>
     </div>
