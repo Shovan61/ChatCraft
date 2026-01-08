@@ -3,6 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { ChevronRight, PencilIcon } from "lucide-react";
 import Link from "next/link";
+import ActivateAutomationButton from "../activate-automation-button";
 
 type Props = {
   id: string;
@@ -47,7 +48,7 @@ const AutomationsBreadCrumb = ({ id }: Props) => {
           </p>
         </div> */}
       </div>
-      {/* <ActivateAutomationButton id={id} /> */}
+      <ActivateAutomationButton id={id} />
     </div>
   );
 };

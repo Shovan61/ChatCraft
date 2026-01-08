@@ -1,4 +1,5 @@
 import AutomationsBreadCrumb from "@/components/global/automation-bread-cumb";
+import Trigger from "@/components/global/automations/trigger";
 import React from "react";
 
 type Props = {
@@ -16,10 +17,10 @@ async function Page({ params }: Props) {
           {/* <Warning /> */}
           When...
         </div>
-        {/* <Trigger id={params.id} /> */}
+        <Trigger id={id} />
       </div>
-      {/* <ThenNode id={params.id} />
-        <PostNode id={params.id} /> */}
+      {/* <ThenNode id={id} />
+        <PostNode id={id} /> */}
     </div>
   );
 }
