@@ -1,6 +1,6 @@
 import Sidebar from "@/components/global/sidebar";
 import React from "react";
-import Image from "next/image";
+import { QueryClient } from '@tanstack/react-query'
 import InfoBar from "@/components/global/infobar";
 
 type Props = {
@@ -10,8 +10,13 @@ type Props = {
 
 async function Layout({ children, params }: Props) {
   const { slug } = await params;
-  // QueryClient
-
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+    },
+  },
+})
   //   WIP: query client and fetch data
   return (
     <div className="p-4">

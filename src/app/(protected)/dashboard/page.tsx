@@ -1,6 +1,5 @@
 import { onBoardUser } from "@/actions/users";
 import { redirect } from "next/navigation";
-import React from "react";
 
 async function Dashboardpage() {
   const user = await onBoardUser();
