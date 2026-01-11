@@ -41,11 +41,11 @@ model User {
 
 model Automation {
   id        String   @id @default(uuid()) @db.Uuid
-  name      String
+  name      String   @default("Untitled")
   createdAt DateTime @default(now())
   active    Boolean  @default(false)
 
-  userId String @db.Uuid
+  userId String? @db.Uuid
   user   User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   trigger  Trigger[]

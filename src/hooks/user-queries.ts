@@ -1,3 +1,5 @@
+"use client";
+
 import { getAllAutomations } from "@/actions/automations";
 import { useQuery } from "@tanstack/react-query";
 

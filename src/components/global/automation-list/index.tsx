@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -5,9 +6,10 @@ import { usePaths } from "@/hooks/use-paths";
 import { useQueryAutomations } from "@/hooks/user-queries";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo } from "react";
 import CreateAutomation from "../create-automation";
 import { formattedDate } from "@/lib/date-formatter";
+import { useMutationDataState } from "@/hooks/use-mutation-data";
 
 function AutomationList() {
   const { pathname } = usePaths();
@@ -39,7 +41,7 @@ function AutomationList() {
 
               {automation.keywords.length > 0 ? (
                 <div className="flex gap-x-2 flex-wrap mt-3">
-                  {automation.keywords.map((keyword, key) => (
+                  {automation.keywords.map((keyword: any, key: any) => (
                     <div
                       key={keyword.id}
                       className={cn(
@@ -55,7 +57,6 @@ function AutomationList() {
                       )}
                     >
                       {keyword.word}
-                      Test
                     </div>
                   ))}
                 </div>
@@ -70,13 +71,13 @@ function AutomationList() {
                 {formattedDate(new Date())}
               </p>
 
-              {automation.listner?.listener === "SMARTAI" ? ( 
-              <Button className="w-full">Smart AI</Button>
-            ) : (
-            <Button className="bg-background-80 hover:bg-background-80 text-white">
-              Standard
-            </Button>
-          )}
+              {automation.listner?.listener === "SMARTAI" ? (
+                <Button className="">Smart AI</Button>
+              ) : (
+                <Button className="bg-background-80 hover:bg-background-80 text-white">
+                  Standard
+                </Button>
+              )}
             </div>
           </Link>
         );
