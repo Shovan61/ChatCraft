@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import { onCurrentUser } from "../users";
-import { createAutomation, getAutomations } from "./query";
+import { createAutomation, findAutomation, getAutomations } from "./query";
 
 export const getAllAutomations = async () => {
   const user = await onCurrentUser();
@@ -29,6 +29,22 @@ export const createAutomations = async (id?: string) => {
       };
     }
   } catch (error) {
+    console.log(error);
+
     return { status: 500, data: "Internal Server Error" };
+  }
+};
+
+export const getAutomationInfo = async (id: string) => {
+  await onCurrentUser();
+  try {
+    const automation = await findAutomation(id);
+    if (automation) return { status: 200, data: automation };
+
+    return { status: 404 };
+  } catch (error) {
+    console.log(error);
+
+    return { status: 500 };
   }
 };
