@@ -29,7 +29,7 @@ function AutomationList() {
       {data?.data?.map((automation) => {
         return (
           <Link
-            href={`${pathname}/1`}
+            href={`${pathname}/${automation.id}`}
             key={automation.id}
             className=" hover:opacity-80 transition duration-100 rounded-xl p-5 border radial--gradient--automations flex border-[#545454]"
           >

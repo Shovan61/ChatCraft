@@ -65,6 +65,8 @@ export const updateAutomationName = async (
   await onCurrentUser();
   try {
     const update = await updateAutomation(automationId, data);
+    console.log(update);
+
     if (update) {
       return { status: 200, data: "Automation successfully updated" };
     }
