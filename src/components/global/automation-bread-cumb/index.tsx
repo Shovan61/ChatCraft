@@ -32,7 +32,7 @@ const AutomationsBreadCrumb = ({ id }: Props) => {
               placeholder={
                 isPending ? latestVariable.variables : "Add a new name"
               }
-              className="bg-transparent h-auto outline-none text-base border-none p-0"
+              className="bg-transparent h-auto outline-none text-base p-0"
             />
           ) : (
             <>
