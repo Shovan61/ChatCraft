@@ -4,12 +4,14 @@ import { Input } from "@/components/ui/input";
 import { ChevronRight, PencilIcon } from "lucide-react";
 import Link from "next/link";
 import ActivateAutomationButton from "../activate-automation-button";
+import { useQueryAutomation } from "@/hooks/user-queries";
 
 type Props = {
   id: string;
 };
 
 const AutomationsBreadCrumb = ({ id }: Props) => {
+    const { data } = useQueryAutomation(id);
   const edit = "";
 
   return (

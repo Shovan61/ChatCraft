@@ -60,3 +60,19 @@ export const findAutomation = async (id: string) => {
     },
   });
 };
+
+export const updateAutomation = async (
+  id: string,
+  update: {
+    name?: string;
+    active?: boolean;
+  }
+) => {
+  return await client.automation.update({
+    where: { id },
+    data: {
+      name: update.name,
+      active: update.active,
+    },
+  });
+};

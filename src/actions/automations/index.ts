@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import { onCurrentUser } from "../users";
-import { createAutomation, findAutomation, getAutomations } from "./query";
+import {
+  createAutomation,
+  findAutomation,
+  getAutomations,
+  updateAutomation,
+} from "./query";
 
 export const getAllAutomations = async () => {
   const user = await onCurrentUser();
@@ -46,5 +51,26 @@ export const getAutomationInfo = async (id: string) => {
     console.log(error);
 
     return { status: 500 };
+  }
+};
+
+export const updateAutomationName = async (
+  automationId: string,
+  data: {
+    name?: string;
+    active?: boolean;
+    automation?: string;
+  }
+) => {
+  await onCurrentUser();
+  try {
+    const update = await updateAutomation(automationId, data);
+    if (update) {
+      return { status: 200, data: "Automation successfully updated" };
+    }
+    return { status: 404, data: "Oops! could not find automation" };
+  } catch (error) {
+    console.log(error);
+    return { status: 500, data: "Oops! something went wrong" };
   }
 };
