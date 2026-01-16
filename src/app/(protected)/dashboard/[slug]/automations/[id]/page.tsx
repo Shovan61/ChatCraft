@@ -14,7 +14,8 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
-  const info = await getAutomationInfo(params.id);
+  const { id } = await params;
+  const info = await getAutomationInfo(id);
   return {
     title: info.data?.name,
   };
@@ -25,7 +26,7 @@ async function Page({ params }: Props) {
 
   const query = new QueryClient();
 
-  await prefetchUserAutomation(query, params.id);
+  await prefetchUserAutomation(query, id);
 
   return (
     <HydrationBoundary state={dehydrate(query)}>

@@ -1,5 +1,20 @@
 import { client } from "@/lib/prisma";
 
+export const createAutomation = async (clerkId: string, id?: string) => {
+  return await client.user.update({
+    where: {
+      clerkId,
+    },
+    data: {
+      automations: {
+        create: {
+          ...(id && { id }),
+        },
+      },
+    },
+  });
+};
+
 export const getAutomations = async (clerkId: string) => {
   return await client.user.findUnique({
     where: { clerkId },
@@ -15,31 +30,6 @@ export const getAutomations = async (clerkId: string) => {
       },
     },
   });
-};
-
-export const createAutomation = async (clerkId: string, id?: string) => {
-  try {
-    const result = await client.user.update({
-      where: {
-        clerkId,
-      },
-      data: {
-        automations: {
-          create: {
-            ...(id && { id }),
-          },
-        },
-      },
-    });
-    if (result) {
-      return { status: 200, data: result };
-    }
-    return { status: 404, data: undefined };
-  } catch (error) {
-    console.log(error);
-
-    return { status: 500, data: undefined };
-  }
 };
 
 export const findAutomation = async (id: string) => {
@@ -73,6 +63,111 @@ export const updateAutomation = async (
     data: {
       name: update.name,
       active: update.active,
+    },
+  });
+};
+
+export const addListener = async (
+  automationId: string,
+  listener: "MESSAGE" | "SMARTAI",
+  prompt: string,
+  reply?: string
+) => {
+  return await client.automation.update({
+    where: {
+      id: automationId,
+    },
+    data: {
+      listner: {
+        create: {
+          listener,
+          prompt,
+          commentReply: reply,
+        },
+      },
+    },
+  });
+};
+
+export const addTrigger = async (automationId: string, trigger: string[]) => {
+  if (trigger.length === 2) {
+    return await client.automation.update({
+      where: {
+        id: automationId,
+      },
+      data: {
+        trigger: {
+          createMany: {
+            data: [
+              {
+                type: trigger[0],
+              },
+              {
+                type: trigger[1],
+              },
+            ],
+          },
+        },
+      },
+    });
+  }
+
+  return await client.automation.update({
+    where: {
+      id: automationId,
+    },
+    data: {
+      trigger: {
+        create: {
+          type: trigger[0],
+        },
+      },
+    },
+  });
+};
+
+export const addKeyword = async (automationId: string, keyword: string) => {
+  return await client.automation.update({
+    where: {
+      id: automationId,
+    },
+    data: {
+      keywords: {
+        create: {
+          word: keyword,
+        },
+      },
+    },
+  });
+};
+
+export const deleteKeywordQuery = async (id: string) => {
+  return await client.keyword.delete({
+    where: {
+      id,
+    },
+  });
+};
+
+export const addPost = async (
+  automationId: string,
+  posts: {
+    postId: string;
+    caption?: string;
+    media: string;
+    mediaType: "IMAGE" | "VIDEO" | "CAROSEL_ALBUM";
+  }[]
+) => {
+  return await client.automation.update({
+    where: {
+      id: automationId,
+    },
+    data: {
+      posts: {
+        createMany: {
+          data: posts,
+        },
+      },
     },
   });
 };
