@@ -45,12 +45,7 @@ function Trigger({ id }: Props) {
     );
   }
 
-  return (
-    <ActiveTrigger
-      type="COMMENT"
-      keywords={[{ id: "1", automationId: id, word: "Get Started" }]}
-    />
-  );
+  return <></>;
 }
 
 export default Trigger;
