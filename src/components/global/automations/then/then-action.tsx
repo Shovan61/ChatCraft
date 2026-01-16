@@ -1,4 +1,3 @@
-import { useListener } from "@/hooks/use-automations";
 import React from "react";
 import TriggerButton from "../trigger-button";
 import { AUTOMATION_LISTENERS } from "@/constants/automation";
@@ -8,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
+import { useListener } from "@/hooks/use-automation";
 
 type Props = {
   id: string;
@@ -62,7 +62,7 @@ const ThenAction = ({ id }: Props) => {
             </div>
           )
         )}
-        <form onSubmit={onFormSubmit} className="flex flex-col gap-y-2">
+        <form onSubmit={onFormSubmit} className="flex flex-col gap-y-2 mt-4">
           <Textarea
             placeholder={
               Listener === "SMARTAI"
@@ -70,14 +70,14 @@ const ThenAction = ({ id }: Props) => {
                 : "Add a message you want send to your customers"
             }
             {...register("prompt")}
-            className="bg-background-80 outline-none border-none ring-0 focus:ring-0"
+            className="bg-background-80 "
           />
           <Input
             {...register("reply")}
             placeholder="Add a reply for comments (Optional)"
-            className="bg-background-80 outline-none border-none ring-0 focus:ring-0"
+            className="bg-background-80 mt-4 "
           />
-          <Button className="bg-gradient-to-br w-full from-[#3352CC] font-medium text-white to-[#1C2D70]">
+          <Button className="bg-gradient-to-br w-full from-[#3352CC] mt-4 font-medium text-white to-[#1C2D70]">
             {isPending && <Spinner />}
             Add Listner
           </Button>

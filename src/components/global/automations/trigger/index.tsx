@@ -5,6 +5,12 @@ import { useQueryAutomation } from "@/hooks/user-queries";
 import React from "react";
 import ActiveTrigger from "./active";
 import { Separator } from "@/components/ui/separator";
+import ThenAction from "../then/then-action";
+import TriggerButton from "../trigger-button";
+import { AUTOMATION_TRIGGERS } from "@/constants/automation";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 
 type Props = {
   id: string;
@@ -40,12 +46,45 @@ function Trigger({ id }: Props) {
           </>
         )}
 
-        {/* {!data.data.listner && <ThenAction id={id} />} */}
+        {!data.data.listner && <ThenAction id={id} />}
       </div>
     );
   }
 
-  return <></>;
+  return (
+    <TriggerButton label="Add Trigger">
+      <div className="flex flex-col gap-y-2">
+        {AUTOMATION_TRIGGERS.map((trigger) => (
+          <div
+            key={trigger.id}
+            onClick={() => onSetTrigger(trigger.type)}
+            className={cn(
+              "hover:opacity-80 text-black font-medium mb-3 rounded-xl flex cursor-pointer flex-col p-3 gap-y-2",
+              !types?.find((t) => t === trigger.type)
+                ? "bg-background-80"
+                : "bg-gradient-to-br from-[#3352CC] text-white font-medium to-[#1C2D70]",
+                
+            )}
+          >
+            <div className="flex gap-x-2 items-center">
+              {trigger.icon}
+              <p className="font-bold">{trigger.label}</p>
+            </div>
+            <p className="text-sm font-light">{trigger.description}</p>
+          </div>
+        ))}
+        {/* <Keywords id={id} /> */}
+        <Button
+          onClick={onSaveTrigger}
+          disabled={types?.length === 0}
+          className="bg-gradient-to-br from-[#3352CC] font-medium text-white to-[#1C2D70]"
+        >
+          {isPending && <Spinner />}
+          Create Trigger
+        </Button>
+      </div>
+    </TriggerButton>
+  );
 }
 
 export default Trigger;
