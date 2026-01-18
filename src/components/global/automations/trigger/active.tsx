@@ -11,6 +11,7 @@ type Props = {
 };
 
 function ActiveTrigger({ keywords, type }: Props) {
+
   return (
     <div className="bg-background-80 p-3 rounded-xl w-full">
       <div className="flex gap-x-2 items-center">
@@ -27,8 +28,11 @@ function ActiveTrigger({ keywords, type }: Props) {
           : "If the user sends a direct message that is setup to listen for keywords, this automation will trigger."}
       </p>
       <div className="flex gap-2 mt-5 flex-wrap">
-        {keywords.map((word)=>(
-          <div key={word.id} className="bg-gradient-to-br from-[#c7d2fc] to-[#7c92ea] flex items-center gap-x-2 capitalize text-white font-light py-1 px-4 rounded-full">
+        {keywords.map((word) => (
+          <div
+            key={word.id}
+            className="bg-gradient-to-br px-4 mt-3 mb-3 rounded-full py-2 from-[#3352CC] font-medium text-white to-[#1C2D70]"
+          >
             <p>{word.word}</p>
           </div>
         ))}

@@ -35,7 +35,7 @@ async function Page({ params }: Props) {
         <div className="w-full lg:w-10/12 xl:w-6/12 p-5 rounded-xl flex flex-col  gap-y-3">
           <div className="flex gap-x-2">
             {/* <Warning /> */}
-            When...
+           <span className="font-semibold text-xl text-muted-foreground"> When...</span>
           </div>
           <Trigger id={id} />
         </div>

@@ -2,6 +2,8 @@
 
 import {
   createAutomations,
+  deleteKeyword,
+  saveKeyword,
   saveListener,
   saveTrigger,
   updateAutomationName,
@@ -86,7 +88,6 @@ export const useTriggers = (id: string) => {
   return { types, onSetTrigger, onSaveTrigger, isPending };
 };
 
-
 export const useListener = (id: string) => {
   const [listener, setListener] = useState<"MESSAGE" | "SMARTAI" | null>(null);
 
@@ -109,4 +110,32 @@ export const useListener = (id: string) => {
 
   const onSetListener = (type: "SMARTAI" | "MESSAGE") => setListener(type);
   return { onSetListener, register, onFormSubmit, listener, isPending };
+};
+
+export const useKeywords = (id: string) => {
+  const [keyword, setKeyword] = useState("");
+  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setKeyword(e.target.value);
+
+  const { mutate } = useMutationData(
+    ["add-keyword"],
+    (data: { keyword: string }) => saveKeyword(id, data.keyword),
+    "automation-info",
+    () => setKeyword("")
+  );
+
+  const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      mutate({ keyword });
+      setKeyword("");
+    }
+  };
+
+  const { mutate: deleteMutation } = useMutationData(
+    ["delete-keyword"],
+    (data: { id: string }) => deleteKeyword(data.id),
+    "automation-info"
+  );
+
+  return { keyword, onValueChange, onKeyPress, deleteMutation };
 };

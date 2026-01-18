@@ -11,6 +11,7 @@ import { AUTOMATION_TRIGGERS } from "@/constants/automation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
+import Keywords from "./keywords";
 
 type Props = {
   id: string;
@@ -73,7 +74,7 @@ function Trigger({ id }: Props) {
             <p className="text-sm font-light">{trigger.description}</p>
           </div>
         ))}
-        {/* <Keywords id={id} /> */}
+        <Keywords id={id} />
         <Button
           onClick={onSaveTrigger}
           disabled={types?.length === 0}
