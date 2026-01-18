@@ -28,7 +28,7 @@ function ActiveTrigger({ keywords, type }: Props) {
       </p>
       <div className="flex gap-2 mt-5 flex-wrap">
         {keywords.map((word)=>(
-          <div key={word.id} className="bg-gradient-to-br from-[#3352CC] to-[#1C2D70] flex items-center gap-x-2 capitalize text-white font-light py-1 px-4 rounded-full">
+          <div key={word.id} className="bg-gradient-to-br from-[#c7d2fc] to-[#7c92ea] flex items-center gap-x-2 capitalize text-white font-light py-1 px-4 rounded-full">
             <p>{word.word}</p>
           </div>
         ))}
