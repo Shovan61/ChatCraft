@@ -1,5 +1,6 @@
 import { getAutomationInfo } from "@/actions/automations";
 import AutomationsBreadCrumb from "@/components/global/automation-bread-cumb";
+import ThenNode from "@/components/global/automations/then/node";
 import Trigger from "@/components/global/automations/trigger";
 import { Warning } from "@/icons";
 import { prefetchUserAutomation } from "@/lib/react-query/prefetch";
@@ -36,12 +37,15 @@ async function Page({ params }: Props) {
         <div className="w-full lg:w-10/12 xl:w-6/12 p-5 rounded-xl flex flex-col  gap-y-3">
           <div className="flex gap-x-2 ">
             <Warning />
-           <span className="font-semibold text-xl text-muted-foreground"> When...</span>
+            <span className="font-semibold text-xl text-muted-foreground">
+              {" "}
+              When...
+            </span>
           </div>
           <Trigger id={id} />
         </div>
-        {/* <ThenNode id={id} />
-        <PostNode id={id} /> */}
+        <ThenNode id={id} />
+        {/* <PostNode id={id} /> */}
       </div>
     </HydrationBoundary>
   );
