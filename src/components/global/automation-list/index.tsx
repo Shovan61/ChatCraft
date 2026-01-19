@@ -44,17 +44,7 @@ function AutomationList() {
                   {automation.keywords.map((keyword: any, key: any) => (
                     <div
                       key={keyword.id}
-                      className={cn(
-                        "rounded-full px-4 py-1 capitalize",
-                        (0 + 1) % 1 == 0 &&
-                          "bg-keyword-green/15 border-2 border-keyword-green",
-                        (1 + 1) % 2 == 0 &&
-                          "bg-keyword-purple/15 border-2 border-keyword-purple",
-                        (2 + 1) % 3 == 0 &&
-                          "bg-keyword-yellow/15 border-2 border-keyword-yellow",
-                        (3 + 1) % 4 == 0 &&
-                          "bg-keyword-red/15 border-2 border-keyword-red"
-                      )}
+                      className="bg-gradient-to-br px-4 mt-3 mb-3 rounded-full py-2 from-[#3352CC] font-medium text-white to-[#1C2D70]"
                     >
                       {keyword.word}
                     </div>

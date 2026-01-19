@@ -1,6 +1,7 @@
 import { getAutomationInfo } from "@/actions/automations";
 import AutomationsBreadCrumb from "@/components/global/automation-bread-cumb";
 import Trigger from "@/components/global/automations/trigger";
+import { Warning } from "@/icons";
 import { prefetchUserAutomation } from "@/lib/react-query/prefetch";
 import {
   dehydrate,
@@ -33,8 +34,8 @@ async function Page({ params }: Props) {
       <div className=" flex flex-col items-center gap-y-20">
         <AutomationsBreadCrumb id={id} />
         <div className="w-full lg:w-10/12 xl:w-6/12 p-5 rounded-xl flex flex-col  gap-y-3">
-          <div className="flex gap-x-2">
-            {/* <Warning /> */}
+          <div className="flex gap-x-2 ">
+            <Warning />
            <span className="font-semibold text-xl text-muted-foreground"> When...</span>
           </div>
           <Trigger id={id} />
