@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { useQueryAutomation } from "@/hooks/user-queries";
 import { PlaneBlue, SmartAi, Warning } from "@/icons";
 import React from "react";
-// import PostButton from "../post";
+import PostButton from "../post";
 
 type Props = {
   id: string;
@@ -49,8 +49,7 @@ const ThenNode = ({ id }: Props) => {
       {data.data.posts.length > 0 ? (
         <></>
       ) : commentTrigger ? (
-        // <PostButton id={id} />
-        <>test</>
+        <PostButton id={id} />
       ) : (
         <></>
       )}
