@@ -36,7 +36,7 @@ const PostButton = ({ id }: Props) => {
                   })
                 }
               >
-                {posts.find((p) => p.postId === post.id) && (
+                {posts.find((p: any) => p.postId === post.id) && (
                   <CheckCircle
                     fill="white"
                     stroke="black"
